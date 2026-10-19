@@ -8,31 +8,28 @@ export class CardApiService {
   private static memoryCache: YugiohCard[] | null = null;
 
   public static async getAllCards(): Promise<YugiohCard[]> {
-    if (this.memoryCache && this.memoryCache.length > 0) {
+    if (this.memoryCache && this.memoryCache.length > 500) {
       return this.memoryCache;
     }
 
+    // Clear any previous small test cache from localStorage
     try {
-      const cached = localStorage.getItem(CACHE_STORAGE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          this.memoryCache = parsed;
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.warn('Could not read cached cards from storage', e);
+      localStorage.removeItem(CACHE_STORAGE_KEY);
+      localStorage.removeItem('duelverse_cards_cache');
+    } catch {
+      // ignore
     }
 
     try {
-      // Fetch full official dataset (all 14,600+ cards)
-      const res = await fetch(`${API_BASE_URL}`);
+      // Fetch the full official dataset of 14,618 cards
+      const res = await fetch(API_BASE_URL);
       if (!res.ok) throw new Error(`API error: ${res.status}`);
       const json = await res.json();
-      if (json && Array.isArray(json.data)) {
+      if (json && Array.isArray(json.data) && json.data.length > 0) {
         const map = new Map<number, YugiohCard>();
+        // Add our enhanced initial cards first
         INITIAL_FEATURED_CARDS.forEach(c => map.set(c.id, c));
+        // Add all official cards
         (json.data as YugiohCard[]).forEach(c => {
           if (!map.has(c.id)) {
             map.set(c.id, c);
@@ -41,16 +38,10 @@ export class CardApiService {
 
         const merged = Array.from(map.values());
         this.memoryCache = merged;
-        try {
-          // Keep a quick local backup of the top cards
-          localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(merged.slice(0, 50)));
-        } catch {
-          // ignore storage limit
-        }
         return merged;
       }
     } catch (apiErr) {
-      console.warn('Falling back to local curated card catalogue', apiErr);
+      console.warn('API error fetching full catalog, trying backup', apiErr);
     }
 
     this.memoryCache = INITIAL_FEATURED_CARDS;

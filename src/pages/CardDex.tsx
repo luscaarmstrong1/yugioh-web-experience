@@ -186,15 +186,15 @@ export const CardDex: React.FC = () => {
                 <div className={styles.loadMoreContainer}>
                   <button 
                     className={styles.loadMoreBtn} 
-                    onClick={() => setDisplayLimit(prev => prev + 60)}
+                    onClick={() => setDisplayLimit(prev => Math.min(prev + 120, filteredCards.length))}
                   >
-                    <span>Carregar Mais Cartas ({displayLimit} de {filteredCards.length})</span>
+                    <span>Carregar Mais Cartas (+120) — Exibindo {displayLimit} de {filteredCards.length}</span>
                   </button>
                   <button 
                     className={styles.loadAllBtn} 
                     onClick={() => setDisplayLimit(filteredCards.length)}
                   >
-                    <span>Carregar Todas as {filteredCards.length} Cartas</span>
+                    <span>Carregar Todas as {filteredCards.length.toLocaleString('pt-BR')} Cartas</span>
                   </button>
                 </div>
               )}
