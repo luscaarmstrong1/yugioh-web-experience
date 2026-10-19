@@ -1,0 +1,255 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 65px);
+  background: #080b14;
+  color: #f2f5ff;
+  overflow: hidden;
+}
+
+.header {
+  padding: 14px 24px;
+  background: rgba(13, 18, 32, 0.9);
+  border-bottom: 1px solid rgba(217, 173, 86, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.deckNameBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deckNameInput {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(217, 173, 86, 0.4);
+  color: #d9ad56;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 6px;
+  outline: none;
+  width: 280px;
+}
+
+.formatSelect {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(23, 120, 255, 0.4);
+  color: #00d5ff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(23, 120, 255, 0.15);
+  border: 1px solid #1778ff;
+  color: #f2f5ff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: #1778ff;
+  box-shadow: 0 0 12px rgba(23, 120, 255, 0.5);
+}
+
+.mainGrid {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.catalogueSection {
+  width: 380px;
+  background: rgba(10, 15, 28, 0.9);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionHeader {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #d9ad56;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cardsCatalogue {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 12px;
+}
+
+.catalogueCardItem {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.catalogueCardItem:hover {
+  transform: scale(1.05);
+}
+
+.addOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 213, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  border-radius: 6px;
+  transition: opacity 0.2s ease;
+}
+
+.catalogueCardItem:hover .addOverlay {
+  opacity: 1;
+}
+
+.deckBoard {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deckCategoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(217, 173, 86, 0.25);
+  padding-bottom: 8px;
+}
+
+.categoryTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f2f5ff;
+}
+
+.legalBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(53, 186, 131, 0.2);
+  color: #35ba83;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.illegalBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(217, 54, 74, 0.2);
+  color: #ff8b99;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.statsRatios {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.monsterRatio { color: #ff9955; }
+.spellRatio { color: #35ba83; }
+.trapRatio { color: #ff55a3; }
+
+.cardSlotsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+  min-height: 120px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.deckSlot {
+  position: relative;
+  cursor: pointer;
+}
+
+.removeIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(217, 54, 74, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  border-radius: 6px;
+  transition: opacity 0.2s ease;
+  color: white;
+}
+
+.deckSlot:hover .removeIcon {
+  opacity: 1;
+}
+
+.testHandSection {
+  background: rgba(13, 22, 41, 0.8);
+  border: 1px solid #00d5ff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 20px rgba(0, 213, 255, 0.2);
+}
+
+.handHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #00d5ff;
+  margin-bottom: 12px;
+}
+
+.handCardsRow {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}

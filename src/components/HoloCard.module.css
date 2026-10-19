@@ -1,0 +1,108 @@
+.cardWrapper {
+  position: relative;
+  border-radius: 8px;
+  transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+  user-select: none;
+  cursor: default;
+  display: inline-block;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  filter: brightness(1.08);
+}
+
+.cardFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  background: #080b14;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.holoFoil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  mix-blend-mode: color-dodge;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.cardBorderGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(217, 173, 86, 0.4);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Sizes */
+.sm {
+  width: 72px;
+  height: 105px;
+}
+
+.md {
+  width: 140px;
+  height: 204px;
+}
+
+.lg {
+  width: 220px;
+  height: 320px;
+}
+
+.hero {
+  width: 320px;
+  height: 466px;
+}
+
+.quickInfo {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #f2f5ff;
+  text-align: center;
+}
+
+.cardTitle {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #d9ad56;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2px;
+  font-family: monospace;
+}
+
+.atk {
+  color: #ff5555;
+}
+
+.def {
+  color: #00d5ff;
+}

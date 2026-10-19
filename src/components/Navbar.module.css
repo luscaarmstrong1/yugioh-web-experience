@@ -1,0 +1,112 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: rgba(8, 11, 20, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(217, 173, 86, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.brandContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.millenniumIcon {
+  font-size: 26px;
+  filter: drop-shadow(0 0 8px #d9ad56);
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #d9ad56); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 14px #ffe494); }
+}
+
+.brandTitle {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  background: linear-gradient(135deg, #f2f5ff 0%, #d9ad56 50%, #1778ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.brandSub {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #00d5ff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(23, 120, 255, 0.08);
+  border: 1px solid rgba(23, 120, 255, 0.2);
+  color: #b8c4e2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navButton:hover {
+  background: rgba(23, 120, 255, 0.2);
+  color: #f2f5ff;
+  border-color: #00d5ff;
+  box-shadow: 0 0 12px rgba(0, 213, 255, 0.3);
+}
+
+.navButton.active {
+  background: linear-gradient(135deg, rgba(217, 173, 86, 0.3) 0%, rgba(23, 120, 255, 0.3) 100%);
+  color: #f2f5ff;
+  border-color: #d9ad56;
+  box-shadow: 0 0 14px rgba(217, 173, 86, 0.4);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.authorBadge {
+  font-size: 11px;
+  color: #8c9bbd;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 14px;
+  white-space: nowrap;
+}
+
+.authorBadge strong {
+  color: #d9ad56;
+}
+
+@media (max-width: 1024px) {
+  .authorBadge {
+    display: none;
+  }
+}

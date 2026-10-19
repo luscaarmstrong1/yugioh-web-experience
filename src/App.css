@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #080B14;
+  color: #F2F5FF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabContent {
+  flex: 1;
+}
+
+/* Intro Screen */
+.introContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #151f38 0%, #080b14 100%);
+  padding: 24px;
+}
+
+.introCard {
+  max-width: 580px;
+  background: rgba(13, 22, 41, 0.85);
+  border: 1px solid rgba(217, 173, 86, 0.4);
+  box-shadow: 0 0 50px rgba(0, 213, 255, 0.3), inset 0 0 30px rgba(217, 173, 86, 0.15);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.millenniumEye {
+  font-size: 54px;
+  filter: drop-shadow(0 0 16px #d9ad56);
+  animation: pulseEye 2s infinite ease-in-out;
+}
+
+@keyframes pulseEye {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #d9ad56); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 24px #ffd885); }
+}
+
+.introTitle {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  margin: 0;
+  background: linear-gradient(135deg, #f2f5ff 0%, #d9ad56 50%, #1778ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.introSub {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #00d5ff;
+  font-weight: 700;
+  margin: 0;
+}
+
+.introLore {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #b8c4e2;
+  margin: 8px 0;
+}
+
+.authorSign {
+  font-size: 13px;
+  color: #8c9bbd;
+}
+
+.authorSign strong {
+  color: #d9ad56;
+}
+
+.startDuelBtn {
+  background: linear-gradient(135deg, #d9ad56 0%, #ffc83b 100%);
+  border: none;
+  color: #080b14;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 14px 36px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(217, 173, 86, 0.7);
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.startDuelBtn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 35px rgba(217, 173, 86, 0.95);
+}
