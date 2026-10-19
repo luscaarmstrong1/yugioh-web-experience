@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { YugiohCard } from '../types';
 import { CardApiService } from '../services/cardApi';
 import { HoloCard } from '../components/HoloCard';
-import { Search, Filter, Shield, Zap, Sparkles, Layers, SlidersHorizontal } from 'lucide-react';
+import { Search, Filter, Shield, Zap, Sparkles, Layers, SlidersHorizontal, Download, ExternalLink, Check } from 'lucide-react';
 import styles from './CardDex.module.css';
 
 export const CardDex: React.FC = () => {
@@ -14,6 +14,36 @@ export const CardDex: React.FC = () => {
   const [selectedArchetype, setSelectedArchetype] = useState('All');
   const [selectedCard, setSelectedCard] = useState<YugiohCard | null>(null);
   const [hologramMode, setHologramMode] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
+
+  const handleDownloadHd = async () => {
+    if (!selectedCard) return;
+    const imgUrl = selectedCard.card_images?.[0]?.image_url;
+    if (!imgUrl) return;
+
+    try {
+      setDownloading(true);
+      const res = await fetch(imgUrl);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      const cleanName = (selectedCard.name_pt || selectedCard.name).replace(/[^a-zA-Z0-9_\-]/g, '_');
+      a.download = `${cleanName}_HD_${selectedCard.id}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+      setDownloadSuccess(true);
+      setTimeout(() => setDownloadSuccess(false), 2500);
+    } catch (err) {
+      console.warn('Direct fetch download blocked by CORS, opening in new tab', err);
+      window.open(imgUrl, '_blank');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   useEffect(() => {
     async function loadCards() {
@@ -164,13 +194,48 @@ export const CardDex: React.FC = () => {
 
             <div className={styles.heroCardHolder}>
               <HoloCard card={selectedCard} size="lg" isHoverable={true} />
-              <button 
-                className={`${styles.hologramBtn} ${hologramMode ? styles.activeHolo : ''}`}
-                onClick={() => setHologramMode(!hologramMode)}
-              >
-                <Zap size={16} />
-                <span>{hologramMode ? 'Desativar Projeção' : 'Modo Holograma 2.5D'}</span>
-              </button>
+              
+              <div className={styles.actionButtonGroup}>
+                <button 
+                  className={styles.downloadHdBtn}
+                  onClick={handleDownloadHd}
+                  disabled={downloading}
+                  title="Baixar imagem original em alta resolução (High-Definition)"
+                >
+                  {downloadSuccess ? (
+                    <>
+                      <Check size={16} color="#35ba83" />
+                      <span>Download Concluído!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download size={16} />
+                      <span>{downloading ? 'Baixando Imagem...' : 'Baixar Carta em Alta Resolução (HD)'}</span>
+                    </>
+                  )}
+                </button>
+
+                <div className={styles.secondaryBtnRow}>
+                  <a
+                    href={selectedCard.card_images?.[0]?.image_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.openDirectBtn}
+                    title="Acessar imagem original completa em nova aba"
+                  >
+                    <ExternalLink size={14} />
+                    <span>Acessar Imagem Original</span>
+                  </a>
+
+                  <button 
+                    className={`${styles.hologramBtn} ${hologramMode ? styles.activeHolo : ''}`}
+                    onClick={() => setHologramMode(!hologramMode)}
+                  >
+                    <Zap size={14} />
+                    <span>{hologramMode ? 'Desativar Projeção' : 'Projeção 2.5D'}</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
             {hologramMode && (
