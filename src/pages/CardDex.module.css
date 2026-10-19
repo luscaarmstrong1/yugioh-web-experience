@@ -118,6 +118,50 @@
   box-shadow: 0 0 16px rgba(217, 173, 86, 0.4);
 }
 
+.loadMoreContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 0 12px 0;
+  flex-wrap: wrap;
+}
+
+.loadMoreBtn {
+  background: linear-gradient(135deg, #1778ff 0%, #00d5ff 100%);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(0, 213, 255, 0.35);
+  transition: all 0.2s ease;
+}
+
+.loadMoreBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 213, 255, 0.6);
+}
+
+.loadAllBtn {
+  background: rgba(217, 173, 86, 0.2);
+  border: 1px solid #d9ad56;
+  color: #ffd885;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.loadAllBtn:hover {
+  background: #d9ad56;
+  color: #080b14;
+}
+
 .inspectPanel {
   width: 380px;
   background: rgba(10, 15, 28, 0.95);

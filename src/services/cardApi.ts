@@ -26,12 +26,11 @@ export class CardApiService {
     }
 
     try {
-      // Fetch popular archetype snapshot or top staples (e.g. 100 cards with banlist tcg or archetype)
-      const res = await fetch(`${API_BASE_URL}?num=150&offset=0`);
+      // Fetch full official dataset (all 14,600+ cards)
+      const res = await fetch(`${API_BASE_URL}`);
       if (!res.ok) throw new Error(`API error: ${res.status}`);
       const json = await res.json();
       if (json && Array.isArray(json.data)) {
-        // Merge with our enriched initial cards
         const map = new Map<number, YugiohCard>();
         INITIAL_FEATURED_CARDS.forEach(c => map.set(c.id, c));
         (json.data as YugiohCard[]).forEach(c => {
@@ -43,9 +42,10 @@ export class CardApiService {
         const merged = Array.from(map.values());
         this.memoryCache = merged;
         try {
-          localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(merged.slice(0, 80)));
-        } catch (storageErr) {
-          console.warn('Storage quota limit reached for full card cache', storageErr);
+          // Keep a quick local backup of the top cards
+          localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(merged.slice(0, 50)));
+        } catch {
+          // ignore storage limit
         }
         return merged;
       }

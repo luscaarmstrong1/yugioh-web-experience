@@ -16,6 +16,7 @@ export const CardDex: React.FC = () => {
   const [hologramMode, setHologramMode] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [displayLimit, setDisplayLimit] = useState(60);
 
   const handleDownloadHd = async () => {
     if (!selectedCard) return;
@@ -168,17 +169,36 @@ export const CardDex: React.FC = () => {
               <p>Nenhuma carta encontrada com os filtros selecionados.</p>
             </div>
           ) : (
-            <div className={styles.cardGrid}>
-              {filteredCards.map(c => (
-                <div
-                  key={c.id}
-                  className={`${styles.cardThumb} ${selectedCard?.id === c.id ? styles.selectedThumb : ''}`}
-                  onClick={() => setSelectedCard(c)}
-                >
-                  <HoloCard card={c} size="md" showDetails={true} />
+            <>
+              <div className={styles.cardGrid}>
+                {filteredCards.slice(0, displayLimit).map(c => (
+                  <div
+                    key={c.id}
+                    className={`${styles.cardThumb} ${selectedCard?.id === c.id ? styles.selectedThumb : ''}`}
+                    onClick={() => setSelectedCard(c)}
+                  >
+                    <HoloCard card={c} size="md" showDetails={true} />
+                  </div>
+                ))}
+              </div>
+
+              {displayLimit < filteredCards.length && (
+                <div className={styles.loadMoreContainer}>
+                  <button 
+                    className={styles.loadMoreBtn} 
+                    onClick={() => setDisplayLimit(prev => prev + 60)}
+                  >
+                    <span>Carregar Mais Cartas ({displayLimit} de {filteredCards.length})</span>
+                  </button>
+                  <button 
+                    className={styles.loadAllBtn} 
+                    onClick={() => setDisplayLimit(filteredCards.length)}
+                  >
+                    <span>Carregar Todas as {filteredCards.length} Cartas</span>
+                  </button>
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
 
